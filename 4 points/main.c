@@ -70,27 +70,27 @@ int main(int argc, char *argv[]) {
         exit(-1);
     } else if (pid_1 == 0) { // дочерний 1 
         printf("child #1\n");
-        int input_file = open(input_file_name, O_RDONLY);
+        int input_file = open(input_file_name, O_RDONLY); // открываем файл на чтение
         if (stat(input_file_name, &st) == 0) {
             input_file_size = st.st_size;
         }
         char buffer[input_file_size+1];
         buffer[input_file_size] = '\0';
-        read(input_file, buffer, input_file_size);
-        write(fd_first_to_second[1], buffer, strlen(buffer) + 1);
+        read(input_file, buffer, input_file_size); // читаем файл
+        write(fd_first_to_second[1], buffer, strlen(buffer) + 1); // пишем в канал
 
-        close(input_file);
+        close(input_file); // закрывваем канал
     } else { // родитель
         pid_2 = fork();
         if (pid_2 < 0) {  
             printf("can\'t fork\n");
         } else if (pid_2 == 0) { // дочерний 2
             printf("child #2\n");
-            close(fd_first_to_second[1]); // close the unused write end of the pipe
+            close(fd_first_to_second[1]); 
             read(fd_first_to_second[0], buffer, size);
             count_words(buffer);
             write(fd_second_to_third[1], buffer, strlen(buffer) + 1);
-            close(fd_second_to_third[1]); // close the write end of the pipe after writing
+            close(fd_second_to_third[1]); // закрываем канал
         } else {  // родитель
             pid_3 = fork();
 

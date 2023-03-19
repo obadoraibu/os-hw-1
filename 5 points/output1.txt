@@ -1,0 +1,5 @@
+if:9
+else:4
+for:2
+while:1
+switch:0
