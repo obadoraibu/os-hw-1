@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+  int i, j;
+  int arr[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+  int arr_size = sizeof(arr) / sizeof(arr[0]);
+  
+  printf("Original array:\n");
+  for (i = 0; i < arr_size; i++) {
+    for (j = 0; j < arr_size; j++) {
+      printf("%d ", arr[i][j]);
+    }
+    printf("\n");
+  }
+  
+  printf("\nTransposed array:\n");
+  for (i = 0; i < arr_size; i++) {
+    for (j = i; j < arr_size; j++) {
+      int temp = arr[i][j];
+      arr[i][j] = arr[j][i];
+      arr[j][i] = temp;
+    }
+  }
+  
+  for (i = 0; i < arr_size; i++) {
+    for (j = 0; j < arr_size; j++) {
+      printf("%d ", arr[i][j]);
+    }
+    printf("\n");
+  }
+  
+  int num1 = 10;
+  int num2 = 20;
+  
+  printf("\nBefore swapping: num1 = %d, num2 = %d\n", num1, num2);
+  
+  num1 = num1 + num2;
+  num2 = num1 - num2;
+  num1 = num1 - num2;
+  
+  printf("After swapping: num1 = %d, num2 = %d\n", num1, num2);
+  
+  return 0;
+}
